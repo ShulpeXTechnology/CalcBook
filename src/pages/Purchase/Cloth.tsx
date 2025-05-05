@@ -3,16 +3,16 @@ import ComponentCard from "../../components/common/ComponentCard";
 import PageMeta from "../../components/common/PageMeta";
 import BasicTableOne from "../../components/tables/BasicTables/BasicTableOne";
 
-export default function BasicTables() {
+export default function Cloth() {
   return (
     <>
       <PageMeta
-        title="React.js Purchase Dashboard | TailAdmin - Next.js Admin Dashboard Template"
-        description="This is React.js Purchase Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
+        title="React.js Cloth Dashboard | TailAdmin - Next.js Admin Dashboard Template"
+        description="This is React.js Cloth Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
       />
-      <PageBreadcrumb pageTitle="Purchase" />
+      <PageBreadcrumb pageTitle="Cloth" />
       <div className="space-y-6">
-        <ComponentCard title="Purchase" showButton={true}>
+        <ComponentCard title="Cloth" showButton={true}>
           <BasicTableOne />
         </ComponentCard>
       </div>

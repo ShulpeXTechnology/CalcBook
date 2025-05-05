@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router";
 // Assume these icons are imported from an icon library
 import {
   BoxCubeIcon,
-  CalenderIcon,
+  // CalenderIcon,
   ChevronDownIcon,
   GridIcon,
   HorizontaLDots,
@@ -32,11 +32,11 @@ const navItems: NavItem[] = [
     path: "/",
     // subItems: [{ name: "Ecommerce", path: "/", pro: false }],
   },
-  {
-    icon: <CalenderIcon />,
-    name: "Calendar",
-    path: "/calendar",
-  },
+  // {
+  //   icon: <CalenderIcon />,
+  //   name: "Calendar",
+  //   path: "/calendar",
+  // },
   {
     icon: <UserCircleIcon />,
     name: "User Profile",
@@ -46,16 +46,27 @@ const navItems: NavItem[] = [
     name: "Forms",
     icon: <ListIcon />,
     path: "/form-elements",
-    // subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
   },
   {
-    name: "Tables",
+    name: "Sales",
     icon: <TableIcon />,
-    path: "/basic-tables",
-    // subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
+    path: "/sales",
   },
   {
-    name: "Pages",
+    name: "Purchase",
+    icon: <PageIcon />,
+    subItems: [
+      { name: "Purchase", path: "/purchase", pro: false },
+      { name: "Cloth", path: "/cloth", pro: false },
+      { name: "Embroidery", path: "/emb", pro: false },
+      { name: "Fiting", path: "/fiting", pro: false },
+      { name: "P Kharch", path: "/kharch", pro: false },
+      { name: "Sirojkey", path: "/sirojkey", pro: false },
+      { name: "T-Rent", path: "/t-rent", pro: false },
+    ],
+  },
+  {
+    name: "Page",
     icon: <PageIcon />,
     subItems: [
       { name: "Blank Page", path: "/blank", pro: false },
