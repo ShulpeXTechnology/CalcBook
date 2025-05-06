@@ -8,39 +8,35 @@ import {
 
 import Badge from "../../ui/badge/Badge";
 
-interface Order {
-  id: number;
-  user: {
-    image: string;
-    name: string;
-    role: string;
-  };
-  projectName: string;
-  team: {
-    images: string[];
-  };
-  status: string;
-  budget: string;
-}
-
-// Define the table data using the interface
-const tableData: Order[] = [
+const tableData: any[] = [
   {
     id: 1,
     user: {
       image: "/images/user/user-17.jpg",
-      name: "Lindsey Curtis",
-      role: "Web Designer",
+      name: "KRISHNA-GHANABHAI",
+      role: "EMB",
     },
-    projectName: "Agency Website",
-    team: {
-      images: [
-        "/images/user/user-22.jpg",
-        "/images/user/user-23.jpg",
-        "/images/user/user-24.jpg",
-      ],
-    },
-    budget: "3.9K",
+    projectName: "Embroidery",
+    qty: "56",
+    rate: "195",
+    total: "10920",
+    discount: "7",
+    discountP: "764",
+    amount: "10156",
+    short: "-",
+    deko: "168",
+    loss: "168",
+    credit: "9988",
+    debit: "9988",
+    dueDate: "19-04-2025",
+    // team: {
+    //   images: [
+    //     "/images/user/user-22.jpg",
+    //     "/images/user/user-23.jpg",
+    //     "/images/user/user-24.jpg",
+    //   ],
+    // },
+    // budget: "3.9K",
     status: "Active",
   },
   {
@@ -48,13 +44,25 @@ const tableData: Order[] = [
     user: {
       image: "/images/user/user-18.jpg",
       name: "Kaiya George",
-      role: "Project Manager",
+      role: "CLOTH",
     },
-    projectName: "Technology",
-    team: {
-      images: ["/images/user/user-25.jpg", "/images/user/user-26.jpg"],
-    },
-    budget: "24.9K",
+    projectName: "CLOTH",
+    qty: "56",
+    rate: "195",
+    total: "10920",
+    discount: "7",
+    discountP: "764",
+    amount: "10156",
+    short: "-",
+    deko: "168",
+    loss: "168",
+    credit: "9988",
+    debit: "9988",
+    dueDate: "19-04-2025",
+    // team: {
+    //   images: ["/images/user/user-25.jpg", "/images/user/user-26.jpg"],
+    // },
+    // budget: "24.9K",
     status: "Pending",
   },
   {
@@ -62,13 +70,25 @@ const tableData: Order[] = [
     user: {
       image: "/images/user/user-17.jpg",
       name: "Zain Geidt",
-      role: "Content Writing",
+      role: "SIROJKEY",
     },
-    projectName: "Blog Writing",
-    team: {
-      images: ["/images/user/user-27.jpg"],
-    },
-    budget: "12.7K",
+    projectName: "SIROJKEY",
+    qty: "56",
+    rate: "195",
+    total: "10920",
+    discount: "7",
+    discountP: "764",
+    amount: "10156",
+    short: "-",
+    deko: "168",
+    loss: "168",
+    credit: "9988",
+    debit: "9988",
+    dueDate: "19-04-2025",
+    // team: {
+    //   images: ["/images/user/user-27.jpg"],
+    // },
+    // budget: "12.7K",
     status: "Active",
   },
   {
@@ -76,17 +96,29 @@ const tableData: Order[] = [
     user: {
       image: "/images/user/user-20.jpg",
       name: "Abram Schleifer",
-      role: "Digital Marketer",
+      role: "FITING",
     },
-    projectName: "Social Media",
-    team: {
-      images: [
-        "/images/user/user-28.jpg",
-        "/images/user/user-29.jpg",
-        "/images/user/user-30.jpg",
-      ],
-    },
-    budget: "2.8K",
+    projectName: "FITING",
+    qty: "56",
+    rate: "195",
+    total: "10920",
+    discount: "7",
+    discountP: "764",
+    amount: "10156",
+    short: "-",
+    deko: "168",
+    loss: "168",
+    credit: "9988",
+    debit: "9988",
+    dueDate: "19-04-2025",
+    // team: {
+    //   images: [
+    //     "/images/user/user-28.jpg",
+    //     "/images/user/user-29.jpg",
+    //     "/images/user/user-30.jpg",
+    //   ],
+    // },
+    // budget: "2.8K",
     status: "Cancel",
   },
   {
@@ -94,18 +126,56 @@ const tableData: Order[] = [
     user: {
       image: "/images/user/user-21.jpg",
       name: "Carla George",
-      role: "Front-end Developer",
+      role: "T-RENT",
     },
-    projectName: "Website",
-    team: {
-      images: [
-        "/images/user/user-31.jpg",
-        "/images/user/user-32.jpg",
-        "/images/user/user-33.jpg",
-      ],
-    },
-    budget: "4.5K",
+    projectName: "T-RENT",
+    qty: "56",
+    rate: "195",
+    total: "10920",
+    discount: "7",
+    discountP: "764",
+    amount: "10156",
+    short: "-",
+    deko: "168",
+    loss: "168",
+    credit: "9988",
+    debit: "9988",
+    dueDate: "19-04-2025",
+    // team: {
+    //   images: [
+    //     "/images/user/user-31.jpg",
+    //     "/images/user/user-32.jpg",
+    //     "/images/user/user-33.jpg",
+    //   ],
+    // },
+    // budget: "4.5K",
     status: "Active",
+  },
+  {
+    id: 6,
+    user: {
+      image: "/images/user/user-17.jpg",
+      name: "Zain Geidt",
+      role: "P KHARCH",
+    },
+    projectName: "P KHARCH",
+    qty: "56",
+    rate: "195",
+    total: "10920",
+    discount: "7",
+    discountP: "764",
+    amount: "10156",
+    short: "-",
+    deko: "168",
+    loss: "168",
+    credit: "9988",
+    debit: "9988",
+    dueDate: "19-04-2025",
+    // team: {
+    //   images: ["/images/user/user-27.jpg"],
+    // },
+    // budget: "12.7K",
+    status: "Delivered",
   },
 ];
 
@@ -128,13 +198,79 @@ export default function BasicTableOne() {
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Project Name
+                  Category
                 </TableCell>
                 <TableCell
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Team
+                  Qty
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Rate
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Total
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Discount %
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Discount ₹
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Amount
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Short
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Deko
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Loss
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Credit
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Debit
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Due Date
                 </TableCell>
                 <TableCell
                   isHeader
@@ -142,18 +278,12 @@ export default function BasicTableOne() {
                 >
                   Status
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-                >
-                  Budget
-                </TableCell>
               </TableRow>
             </TableHeader>
 
             {/* Table Body */}
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-              {tableData.map((order) => (
+              {tableData?.map((order) => (
                 <TableRow key={order.id}>
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
                     <div className="flex items-center gap-3">
@@ -176,9 +306,45 @@ export default function BasicTableOne() {
                     </div>
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.projectName}
+                    {order.projectName?.toUpperCase()}
                   </TableCell>
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {order.qty}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {order.rate}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {order.total}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {order.discount}%
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    ₹ {order.discountP}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {order.amount}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {order.short}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {order.deko}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {order.loss}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {order.credit}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {order.debit}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {order.dueDate}
+                  </TableCell>
+                  {/* <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                     <div className="flex -space-x-2">
                       {order.team.images.map((teamImage, index) => (
                         <div
@@ -195,12 +361,14 @@ export default function BasicTableOne() {
                         </div>
                       ))}
                     </div>
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                     <Badge
                       size="sm"
                       color={
                         order.status === "Active"
+                          ? "primary"
+                          : order?.status == "Delivered"
                           ? "success"
                           : order.status === "Pending"
                           ? "warning"
@@ -210,9 +378,9 @@ export default function BasicTableOne() {
                       {order.status}
                     </Badge>
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
+                  {/* <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
                     {order.budget}
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

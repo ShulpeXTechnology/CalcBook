@@ -7,12 +7,12 @@ export default function BasicTables() {
   return (
     <>
       <PageMeta
-        title="React.js Purchase Dashboard | TailAdmin - Next.js Admin Dashboard Template"
-        description="This is React.js Purchase Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
+        title="React.js Sales Dashboard | TailAdmin - Next.js Admin Dashboard Template"
+        description="This is React.js Sales Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
       />
-      <PageBreadcrumb pageTitle="Purchase" />
+      <PageBreadcrumb pageTitle="Sales" />
       <div className="space-y-6">
-        <ComponentCard title="Purchase" showButton={true}>
+        <ComponentCard title="Sales" showButton={true}>
           <BasicTableOne />
         </ComponentCard>
       </div>
