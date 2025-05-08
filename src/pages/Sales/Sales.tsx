@@ -3,6 +3,7 @@ import { Modal, Input, Select, DatePicker, Button, Tag } from "antd";
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import PageMeta from "../../components/common/PageMeta";
 import BasicTableOne from "../../components/tables/BasicTables/BasicTableOne";
+import dayjs from "dayjs";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -489,7 +490,7 @@ export default function Sales() {
         open={showModal}
         onOk={handleAddItem}
         onCancel={() => setShowModal(false)}
-        width={"auto"}
+        width={1100}
         bodyStyle={{
           maxHeight: 400,
           overflowY: "auto",
@@ -632,12 +633,12 @@ export default function Sales() {
         <div className="">
           <div className="grid grid-cols-3 gap-4">
             <div className="col-span-2">
-              <div className="mb-2">
-                <label className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1">
+              <div className="mb-2 flex">
+                <div className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1 mr-2">
                   CATEGORY
-                </label>
+                </div>
                 <Select
-                  className="w-full"
+                  className="w-[50%]"
                   value={newItem.category}
                   onChange={(v) => setNewItem({ ...newItem, category: v })}
                   options={[
@@ -702,67 +703,81 @@ export default function Sales() {
                   value={newItem.dueDate}
                   onChange={(date) => setNewItem({ ...newItem, date })}
                   format="DD-MM-YYYY"
+                  defaultValue={dayjs()}
                 />
               </div>
             </div>
           </div>
 
           {/* Description, Design, Qty, Rate, Total */}
-          <div className="grid grid-cols-5 gap-2 mb-2">
-            <div className="">
-              <label className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1">
+          <div className="grid grid-cols-12 gap-2 mb-2">
+            <div className="col-span-4">
+              <div className="bg-red-900 text-yellow-300 font-bold text-center py-2 px-1 text-lg border border-red-800">
                 DESCRIPTOIN
-              </label>
+              </div>
               <input
-                className="p-2 rounded w-full"
+                type="text"
+                className="w-full border border-gray-400 py-1 px-2 mt-1 text-base focus:outline-none rounded"
+                placeholder="Description"
                 value={newItem.description}
                 onChange={(e) =>
                   setNewItem({ ...newItem, description: e.target.value })
                 }
               />
             </div>
-            <div>
-              <label className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1">
+            {/* Design - spans 3 columns */}
+            <div className="col-span-2">
+              <div className="bg-red-900 text-yellow-300 font-bold text-center py-2 px-1 text-lg border border-red-800">
                 DESIGNE
-              </label>
+              </div>
               <input
-                className="p-2 rounded w-full"
-                value={newItem.design}
+                type="text"
+                className="w-full border border-gray-400 py-1 px-2 mt-1 text-base focus:outline-none rounded"
+                placeholder="Designe"
+                value={newItem.designe}
                 onChange={(e) =>
-                  setNewItem({ ...newItem, design: e.target.value })
+                  setNewItem({ ...newItem, designe: e.target.value })
                 }
               />
             </div>
-            <div>
-              <label className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1">
+            <div className="col-span-2">
+              <div className="bg-red-900 text-yellow-300 font-bold text-center py-2 px-1 text-lg border border-red-800">
                 QTY
-              </label>
+              </div>
               <input
-                className="p-2 rounded w-full"
-                value={newItem.qty}
+                type="number"
+                className="w-full border border-gray-400 py-1 px-2 mt-1 text-base focus:outline-none rounded"
+                placeholder="Qty"
+                value={newItem.quantity}
                 onChange={(e) =>
-                  setNewItem({ ...newItem, qty: e.target.value })
+                  setNewItem({ ...newItem, quantity: e.target.value })
                 }
               />
             </div>
-            <div>
-              <label className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1">
+            {/* Rate - spans 2 columns */}
+            <div className="col-span-2">
+              <div className="bg-red-900 text-yellow-300 font-bold text-center py-2 px-1 text-lg border border-red-800">
                 RATE
-              </label>
+              </div>
               <input
-                className="p-2 rounded w-full"
+                type="number"
+                className="w-full border border-gray-400 py-1 px-2 mt-1 text-base focus:outline-none rounded"
+                placeholder="Rate"
                 value={newItem.rate}
                 onChange={(e) =>
                   setNewItem({ ...newItem, rate: e.target.value })
                 }
               />
             </div>
-            <div>
-              <label className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1">
+            {/* Total - spans 2 columns */}
+            <div className="col-span-2">
+              <div className="bg-red-900 text-yellow-300 font-bold text-center py-2 px-1 text-lg border border-red-800">
                 TOTAL
-              </label>
+              </div>
               <input
-                className="p-2 rounded w-full"
+                type="number"
+                className="w-full border border-gray-400 py-1 px-2 mt-1 text-base focus:outline-none rounded"
+                placeholder="Total"
                 value={newItem.total}
                 onChange={(e) =>
                   setNewItem({ ...newItem, total: e.target.value })
@@ -773,9 +788,9 @@ export default function Sales() {
 
           {/* Plane, Short, Discount, Loss, Amount */}
           <div className="grid grid-cols-3 gap-2 mb-2">
-            <div className="col-span-2">
-              <div className="mb-2">
-                <label className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1">
+            <div className="col-span-2 flex items-center justify-center">
+              <div className="flex mb-2 items-center justify-center">
+                <label className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1 mr-2">
                   PLANE
                 </label>
                 <input
@@ -786,8 +801,8 @@ export default function Sales() {
                   }
                 />
               </div>
-              <div>
-                <label className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1">
+              <div className="flex items-center justify-center m-auto">
+                <label className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1 mr-2">
                   SHORT
                 </label>
                 <input
@@ -799,34 +814,42 @@ export default function Sales() {
                 />
               </div>
             </div>
-            <div>
-              <div className="grid grid-cols-3 gap-4 mb-2">
-                <div className="flex font-bold text-yellow-300 bg-red-900 rounded items-center justify-center">
+            <div className="space-y-2">
+              <div className="grid grid-cols-3 gap-2">
+                <div className="flex font-bold text-yellow-300 bg-red-900 rounded items-center justify-center col-span-1">
                   DISCOUNT
                 </div>
                 <input
-                  className="col-span-2 rounded"
-                  placeholder="Discount"
-                  value={newItem.discount}
+                  className="rounded w-full"
+                  placeholder="Discount %"
+                  value={newItem.discount1}
                   onChange={(e) =>
-                    setNewItem({ ...newItem, discount: e.target.value })
+                    setNewItem({ ...newItem, discount1: e.target.value })
+                  }
+                />
+                <input
+                  className="rounded col-span-1"
+                  placeholder="Discount ₹"
+                  value={newItem.discount2}
+                  onChange={(e) =>
+                    setNewItem({ ...newItem, discount2: e.target.value })
                   }
                 />
               </div>
-              <div className="grid grid-cols-3 gap-4 mb-2">
+              <div className="grid grid-cols-3 gap-2 mb-2">
                 <div className="flex font-bold text-yellow-300 bg-red-900 rounded items-center justify-center">
                   LOSS
                 </div>
                 <input
-                  className="col-span-2 rounded"
+                  className="col-span-2 rounded w-full"
                   placeholder="Loss"
                   value={newItem.loss}
                   onChange={(e) =>
-                    setNewItem({ ...newItem, discount: e.target.value })
+                    setNewItem({ ...newItem, loss: e.target.value })
                   }
                 />
               </div>
-              <div className="grid grid-cols-3 gap-4 mb-2">
+              <div className="grid grid-cols-3 gap-2 mb-2">
                 <div className="flex font-bold text-yellow-300 bg-red-900 rounded items-center justify-center">
                   AMOUNT
                 </div>
@@ -835,36 +858,12 @@ export default function Sales() {
                   placeholder="Amount"
                   value={newItem.amount}
                   onChange={(e) =>
-                    setNewItem({ ...newItem, discount: e.target.value })
+                    setNewItem({ ...newItem, amount: e.target.value })
                   }
                 />
               </div>
             </div>
           </div>
-
-          {/* <div className="flex gap-4 mt-6 justify-center">
-            <Button
-              type="default"
-              className="bg-gray-100 font-bold"
-              // onClick={() => setNewItem({})}
-            >
-              NEW-DATA
-            </Button>
-            <Button
-              type="primary"
-              className="bg-red-900 font-bold"
-              onClick={handleAddItem}
-            >
-              SAVE
-            </Button>
-            <Button
-              type="default"
-              className="bg-gray-100 font-bold"
-              onClick={() => setShowModal(false)}
-            >
-              EXIT
-            </Button>
-          </div> */}
         </div>
       </Modal>
     </>

@@ -86,6 +86,12 @@ export default function BasicTableOne({
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
+                  Id
+                </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
                   User
                 </TableCell>
                 <TableCell
@@ -185,6 +191,23 @@ export default function BasicTableOne({
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
               {rows?.map((order: any) => (
                 <TableRow key={order.id}>
+                  <TableCell
+                    className={`${
+                      editRowId == order.id ? "p-0" : "px-4 py-3"
+                    } text-gray-500 text-start text-theme-sm dark:text-gray-400"`}
+                  >
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="id"
+                        value={editData.id}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.id
+                    )}
+                  </TableCell>
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
                     {editRowId == order.id ? (
                       <input
