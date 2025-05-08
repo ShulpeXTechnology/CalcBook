@@ -7,179 +7,73 @@ import {
 } from "../../ui/table";
 
 import Badge from "../../ui/badge/Badge";
+import { useState } from "react";
+import { MdEditSquare, MdDeleteForever } from "react-icons/md";
+import { IoSave } from "react-icons/io5";
 
-const tableData: any[] = [
-  {
-    id: 1,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "KRISHNA-GHANABHAI",
-      role: "EMB",
-    },
-    projectName: "Embroidery",
-    qty: "56",
-    rate: "195",
-    total: "10920",
-    discount: "7",
-    discountP: "764",
-    amount: "10156",
-    short: "-",
-    deko: "168",
-    loss: "168",
-    credit: "9988",
-    debit: "9988",
-    dueDate: "19-04-2025",
-    // team: {
-    //   images: [
-    //     "/images/user/user-22.jpg",
-    //     "/images/user/user-23.jpg",
-    //     "/images/user/user-24.jpg",
-    //   ],
-    // },
-    // budget: "3.9K",
-    status: "Active",
-  },
-  {
-    id: 2,
-    user: {
-      image: "/images/user/user-18.jpg",
-      name: "Kaiya George",
-      role: "CLOTH",
-    },
-    projectName: "CLOTH",
-    qty: "56",
-    rate: "195",
-    total: "10920",
-    discount: "7",
-    discountP: "764",
-    amount: "10156",
-    short: "-",
-    deko: "168",
-    loss: "168",
-    credit: "9988",
-    debit: "9988",
-    dueDate: "19-04-2025",
-    // team: {
-    //   images: ["/images/user/user-25.jpg", "/images/user/user-26.jpg"],
-    // },
-    // budget: "24.9K",
-    status: "Pending",
-  },
-  {
-    id: 3,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Zain Geidt",
-      role: "SIROJKEY",
-    },
-    projectName: "SIROJKEY",
-    qty: "56",
-    rate: "195",
-    total: "10920",
-    discount: "7",
-    discountP: "764",
-    amount: "10156",
-    short: "-",
-    deko: "168",
-    loss: "168",
-    credit: "9988",
-    debit: "9988",
-    dueDate: "19-04-2025",
-    // team: {
-    //   images: ["/images/user/user-27.jpg"],
-    // },
-    // budget: "12.7K",
-    status: "Active",
-  },
-  {
-    id: 4,
-    user: {
-      image: "/images/user/user-20.jpg",
-      name: "Abram Schleifer",
-      role: "FITING",
-    },
-    projectName: "FITING",
-    qty: "56",
-    rate: "195",
-    total: "10920",
-    discount: "7",
-    discountP: "764",
-    amount: "10156",
-    short: "-",
-    deko: "168",
-    loss: "168",
-    credit: "9988",
-    debit: "9988",
-    dueDate: "19-04-2025",
-    // team: {
-    //   images: [
-    //     "/images/user/user-28.jpg",
-    //     "/images/user/user-29.jpg",
-    //     "/images/user/user-30.jpg",
-    //   ],
-    // },
-    // budget: "2.8K",
-    status: "Cancel",
-  },
-  {
-    id: 5,
-    user: {
-      image: "/images/user/user-21.jpg",
-      name: "Carla George",
-      role: "T-RENT",
-    },
-    projectName: "T-RENT",
-    qty: "56",
-    rate: "195",
-    total: "10920",
-    discount: "7",
-    discountP: "764",
-    amount: "10156",
-    short: "-",
-    deko: "168",
-    loss: "168",
-    credit: "9988",
-    debit: "9988",
-    dueDate: "19-04-2025",
-    // team: {
-    //   images: [
-    //     "/images/user/user-31.jpg",
-    //     "/images/user/user-32.jpg",
-    //     "/images/user/user-33.jpg",
-    //   ],
-    // },
-    // budget: "4.5K",
-    status: "Active",
-  },
-  {
-    id: 6,
-    user: {
-      image: "/images/user/user-17.jpg",
-      name: "Zain Geidt",
-      role: "P KHARCH",
-    },
-    projectName: "P KHARCH",
-    qty: "56",
-    rate: "195",
-    total: "10920",
-    discount: "7",
-    discountP: "764",
-    amount: "10156",
-    short: "-",
-    deko: "168",
-    loss: "168",
-    credit: "9988",
-    debit: "9988",
-    dueDate: "19-04-2025",
-    // team: {
-    //   images: ["/images/user/user-27.jpg"],
-    // },
-    // budget: "12.7K",
-    status: "Delivered",
-  },
-];
+export default function BasicTableOne({
+  rows,
+  setRows,
+}: {
+  rows: any;
+  setRows: any;
+}) {
+  const [editRowId, setEditRowId] = useState(null);
+  const [editData, setEditData] = useState<any>({
+    name: "",
+    projectName: "",
+    quantity: "",
+    rate: "",
+    total: "",
+    discount: "",
+    discountP: "",
+    amount: "",
+    short: "",
+    deko: "",
+    loss: "",
+    credit: "",
+    debit: "",
+    dueDate: "",
+    status: "",
+  });
 
-export default function BasicTableOne() {
+  const handleEdit = (row: any) => {
+    setEditRowId(row.id);
+    setEditData({
+      name: row.name,
+      projectName: row.projectName,
+      quantity: row.quantity,
+      rate: row.rate,
+      total: row.total,
+      discount: row.discount,
+      discountP: row.discountP,
+      amount: row.amount,
+      short: row.short,
+      deko: row.deko,
+      loss: row.loss,
+      credit: row.credit,
+      debit: row.debit,
+      dueDate: row.dueDate,
+      status: row.status,
+    });
+  };
+
+  const handleSave = (id: any) => {
+    setRows((prevRows: any) =>
+      prevRows.map((row: any) => (row.id == id ? { ...row, ...editData } : row))
+    );
+    setEditRowId(null);
+  };
+
+  const handleDelete = (id: any) => {
+    setRows(rows.filter((row: any) => row.id != id));
+  };
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setEditData((prev: any) => ({ ...prev, [name]: value }));
+  };
+
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -204,7 +98,7 @@ export default function BasicTableOne() {
                   isHeader
                   className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                 >
-                  Qty
+                  Quantity
                 </TableCell>
                 <TableCell
                   isHeader
@@ -278,109 +172,263 @@ export default function BasicTableOne() {
                 >
                   Status
                 </TableCell>
+                <TableCell
+                  isHeader
+                  className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                >
+                  Action
+                </TableCell>
               </TableRow>
             </TableHeader>
 
             {/* Table Body */}
             <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-              {tableData?.map((order) => (
+              {rows?.map((order: any) => (
                 <TableRow key={order.id}>
                   <TableCell className="px-5 py-4 sm:px-6 text-start">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 overflow-hidden rounded-full">
-                        <img
-                          width={40}
-                          height={40}
-                          src={order.user.image}
-                          alt={order.user.name}
-                        />
-                      </div>
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="name"
+                        value={editData.name}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
                       <div>
                         <span className="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                          {order.user.name}
+                          {order.name}
                         </span>
                         <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                          {order.user.role}
+                          {order.projectName}
                         </span>
+                      </div>
+                    )}
+                  </TableCell>
+                  <TableCell
+                    className={`${
+                      editRowId == order.id ? "p-0" : "px-4 py-3"
+                    } text-gray-500 text-start text-theme-sm dark:text-gray-400"`}
+                  >
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="projectName"
+                        value={editData.projectName}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.projectName?.toUpperCase()
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="quantity"
+                        value={editData.quantity}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.quantity
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="rate"
+                        value={editData.rate}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.rate
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="total"
+                        value={editData.total}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.total
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="discount"
+                        value={editData.discount}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.discount + "%"
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="discountP"
+                        value={editData.discountP}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      "₹" + order.discountP
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="amount"
+                        value={editData.amount}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.amount
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="short"
+                        value={editData.short}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.short
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="deko"
+                        value={editData.deko}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.deko
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="loss"
+                        value={editData.loss}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.loss
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="credit"
+                        value={editData.credit}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.credit
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="debit"
+                        value={editData.debit}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.debit
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="dueDate"
+                        value={editData.dueDate}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      order.dueDate
+                    )}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                    {editRowId == order.id ? (
+                      <input
+                        type="text"
+                        name="status"
+                        value={editData.status}
+                        onChange={handleChange}
+                        className="text-gray-500 dark:text-gray-400 bg-transparent"
+                      />
+                    ) : (
+                      <Badge
+                        size="sm"
+                        color={
+                          order.status == "Active"
+                            ? "primary"
+                            : order?.status == "Delivered"
+                            ? "success"
+                            : order.status == "Pending"
+                            ? "warning"
+                            : "error"
+                        }
+                      >
+                        {order.status}
+                      </Badge>
+                    )}
+                  </TableCell>
+                  <TableCell className="px-5 py-4 sm:px-6 text-start">
+                    <div className="flex items-center gap-2">
+                      {editRowId == order.id ? (
+                        <div
+                          className="text-gray-500 cursor-pointer"
+                          onClick={() => handleSave(order.id)}
+                        >
+                          <IoSave />
+                        </div>
+                      ) : (
+                        <div
+                          className="text-gray-500 cursor-pointer"
+                          onClick={() => handleEdit(order)}
+                        >
+                          <MdEditSquare />
+                        </div>
+                      )}
+                      <div
+                        className="text-red-500 ml-2"
+                        onClick={() => handleDelete(order.id)}
+                      >
+                        <MdDeleteForever />
                       </div>
                     </div>
                   </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.projectName?.toUpperCase()}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.qty}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.rate}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.total}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.discount}%
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    ₹ {order.discountP}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.amount}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.short}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.deko}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.loss}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.credit}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.debit}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    {order.dueDate}
-                  </TableCell>
-                  {/* <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    <div className="flex -space-x-2">
-                      {order.team.images.map((teamImage, index) => (
-                        <div
-                          key={index}
-                          className="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900"
-                        >
-                          <img
-                            width={24}
-                            height={24}
-                            src={teamImage}
-                            alt={`Team member ${index + 1}`}
-                            className="w-full size-6"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </TableCell> */}
-                  <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                    <Badge
-                      size="sm"
-                      color={
-                        order.status === "Active"
-                          ? "primary"
-                          : order?.status == "Delivered"
-                          ? "success"
-                          : order.status === "Pending"
-                          ? "warning"
-                          : "error"
-                      }
-                    >
-                      {order.status}
-                    </Badge>
-                  </TableCell>
-                  {/* <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400">
-                    {order.budget}
-                  </TableCell> */}
                 </TableRow>
               ))}
             </TableBody>
