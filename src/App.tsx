@@ -13,7 +13,6 @@ import LineChart from "./pages/Charts/LineChart";
 import BarChart from "./pages/Charts/BarChart";
 import Calendar from "./pages/Calendar";
 import Sales from "./pages/Sales/Sales";
-import AddSales from "./pages/Sales/AddSales";
 import FormElements from "./pages/Forms/FormElements";
 import Blank from "./pages/Blank";
 import AppLayout from "./layout/AppLayout";
@@ -47,7 +46,6 @@ export default function App() {
 
             {/* Sales */}
             <Route path="/sales" element={<Sales />} />
-            <Route path="/addSales" element={<AddSales />} />
 
             {/* Purchase */}
             <Route path="/purchase" element={<Purchase />} />
