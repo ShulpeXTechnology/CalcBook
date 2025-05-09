@@ -4,11 +4,11 @@ import {
   TableCell,
   TableHeader,
   TableRow,
-} from "../../ui/table";
-import Badge from "../../ui/badge/Badge";
+} from "../../components/ui/table";
+import Badge from "../../components/ui/badge/Badge";
 import { MdEditSquare, MdDeleteForever } from "react-icons/md";
 
-export default function BasicTableOne({
+export default function Tables({
   rows,
   onEdit,
   onDelete,

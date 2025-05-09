@@ -2,9 +2,9 @@ import { useState, useMemo } from "react";
 import { Tag } from "antd";
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import PageMeta from "../../components/common/PageMeta";
-import BasicTableOne from "../../components/tables/BasicTables/BasicTableOne";
-import AddItemModal from "../../components/tables/BasicTables/AddItem";
-import FilterModal from "../../components/tables/BasicTables/FilterModal";
+import BasicTableOne from "../../components/sales/Tables";
+import AddItemModal from "../../components/sales/AddItem";
+import FilterModal from "../../components/sales/FilterModal";
 
 export default function Sales() {
   const [rows, setRows] = useState([
