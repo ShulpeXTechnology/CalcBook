@@ -25,6 +25,10 @@ export default function Sales() {
       debit: "9988",
       dueDate: "19-04-2025",
       status: "Active",
+      invoice: "",
+      challanNo: "",
+      desc: "",
+      design: "",
     },
     {
       id: 2,
@@ -43,6 +47,10 @@ export default function Sales() {
       debit: "9988",
       dueDate: "19-04-2025",
       status: "Pending",
+      invoice: "",
+      challanNo: "",
+      desc: "",
+      design: "",
     },
     {
       id: 3,
@@ -61,6 +69,10 @@ export default function Sales() {
       debit: "9988",
       dueDate: "19-04-2025",
       status: "Active",
+      invoice: "",
+      challanNo: "",
+      desc: "",
+      design: "",
     },
     {
       id: 4,
@@ -79,6 +91,10 @@ export default function Sales() {
       debit: "9988",
       dueDate: "19-04-2025",
       status: "Cancel",
+      invoice: "",
+      challanNo: "",
+      desc: "",
+      design: "",
     },
     {
       id: 5,
@@ -97,6 +113,10 @@ export default function Sales() {
       debit: "9988",
       dueDate: "19-04-2025",
       status: "Active",
+      invoice: "",
+      challanNo: "",
+      desc: "",
+      design: "",
     },
     {
       id: 6,
@@ -115,6 +135,10 @@ export default function Sales() {
       debit: "9988",
       dueDate: "19-04-2025",
       status: "Delivered",
+      invoice: "",
+      challanNo: "",
+      desc: "",
+      design: "",
     },
   ]);
 
@@ -175,6 +199,14 @@ export default function Sales() {
   const uniqueNames = Array.from(new Set(rows.map((r) => r.name))).filter(
     Boolean
   );
+
+  const uniqueDesc = Array.from(new Set(rows?.map((r: any) => r.desc))).filter(
+    Boolean
+  );
+
+  const uniqueDesign = Array.from(
+    new Set(rows?.map((r: any) => r.design))
+  ).filter(Boolean);
 
   //   const getUniqueOptions = (key: string) => {
   //   const values = [...new Set(rows.map((item) => item[key]).filter(Boolean))];
@@ -451,6 +483,8 @@ export default function Sales() {
         uniqueNames={uniqueNames}
         uniqueCategories={uniqueCategories}
         uniqueStatus={uniqueStatus}
+        uniqueDesc={uniqueDesc}
+        uniqueDesign={uniqueDesign}
       />
 
       <FilterModal

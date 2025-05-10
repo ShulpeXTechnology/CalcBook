@@ -1,5 +1,7 @@
-import { Modal, Select, DatePicker } from "antd";
+import { Modal, Select, DatePicker, Input, Button } from "antd";
 import dayjs from "dayjs";
+import { useRef, useState } from "react";
+import { FaUserPlus } from "react-icons/fa";
 
 export default function AddItemModal({
   visible,
@@ -11,6 +13,8 @@ export default function AddItemModal({
   uniqueNames,
   uniqueCategories,
   uniqueStatus,
+  uniqueDesc,
+  uniqueDesign,
 }: {
   visible: any;
   onClose: any;
@@ -21,7 +25,78 @@ export default function AddItemModal({
   uniqueNames: any;
   uniqueCategories: any;
   uniqueStatus: any;
+  uniqueDesc: any;
+  uniqueDesign: any;
 }) {
+  const inputRef = useRef<any>(null);
+  const [name, setName] = useState<any>("");
+
+  const handleChange = (value: any) => {
+    setItem((prevItem: any) => ({ ...prevItem, name: value }));
+  };
+
+  const onNameChange = (event: any) => {
+    setName(event.target.value);
+  };
+
+  const addItem = (e: any) => {
+    e.preventDefault();
+    // Add new item only if it's not empty and not already in the list
+    if (name && !uniqueNames.includes(name)) {
+      uniqueNames.push(name);
+    }
+    setName("");
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 0);
+  };
+
+  // Description
+  const inputDescRef = useRef<any>(null);
+  const [nameDesc, setNameDesc] = useState<any>("");
+
+  const handleDescChange = (value: any) => {
+    setItem((prevItem: any) => ({ ...prevItem, description: value }));
+  };
+
+  const onDescChange = (event: any) => {
+    setNameDesc(event.target.value);
+  };
+
+  const addDesc = (e: any) => {
+    e.preventDefault();
+    if (nameDesc && !uniqueDesc.includes(nameDesc)) {
+      uniqueDesc.push(nameDesc);
+    }
+    setNameDesc("");
+    setTimeout(() => {
+      inputDescRef.current?.focus();
+    }, 0);
+  };
+
+  // Design
+  const inputDesignRef = useRef<any>(null);
+  const [nameDesign, setNameDesign] = useState<any>("");
+
+  const handleDesignChange = (value: any) => {
+    setItem((prevItem: any) => ({ ...prevItem, design: value }));
+  };
+
+  const onDesignChange = (event: any) => {
+    setNameDesign(event.target.value);
+  };
+
+  const addDesign = (e: any) => {
+    e.preventDefault();
+    if (nameDesign && !uniqueDesc.includes(nameDesign)) {
+      uniqueDesc.push(nameDesign);
+    }
+    setNameDesign("");
+    setTimeout(() => {
+      inputDescRef.current?.focus();
+    }, 0);
+  };
+
   return (
     <Modal
       title={isEdit ? "Edit Item" : "Add Item"}
@@ -63,15 +138,35 @@ export default function AddItemModal({
               <Select
                 className="w-full"
                 value={item.name}
-                onChange={(v) => setItem({ ...item, name: v })}
+                onChange={handleChange}
                 showSearch
-              >
-                {uniqueNames.map((name: any) => (
-                  <Select.Option key={name} value={name}>
-                    {name}
-                  </Select.Option>
-                ))}
-              </Select>
+                placeholder="Select or add item"
+                dropdownRender={(menu: any) => (
+                  <>
+                    {menu}
+                    <div className="flex items-center">
+                      <Input
+                        placeholder="Please enter party name"
+                        ref={inputRef}
+                        value={name}
+                        onChange={onNameChange}
+                        onKeyDown={(e) => e.stopPropagation()}
+                      />
+                      <Button
+                        type="text"
+                        icon={<FaUserPlus />}
+                        onClick={addItem}
+                      >
+                        Add Party
+                      </Button>
+                    </div>
+                  </>
+                )}
+                options={uniqueNames.map((item: any) => ({
+                  label: item,
+                  value: item,
+                }))}
+              />
             </div>
           </div>
           <div className="">
@@ -107,10 +202,11 @@ export default function AddItemModal({
               </div>
               <DatePicker
                 className="w-full col-span-2 p-2"
-                value={dayjs(item.dueDate, "DD-MM-YYYY")}
-                onChange={(date) => setItem({ ...item, date })}
+                value={item.dueDate ? dayjs(item.dueDate, "DD-MM-YYYY") : null}
+                onChange={(_date: any, dateString: any) =>
+                  setItem({ ...item, dueDate: dateString })
+                }
                 format="DD-MM-YYYY"
-                defaultValue={dayjs()}
               />
             </div>
           </div>
@@ -122,27 +218,79 @@ export default function AddItemModal({
             <div className="bg-red-900 text-yellow-300 font-bold text-center py-2 px-1 text-lg border border-red-800">
               DESCRIPTOIN
             </div>
-            <input
-              type="text"
-              className="w-full border border-gray-400 py-1 px-2 mt-1 text-base focus:outline-none rounded"
-              placeholder="Description"
+            <Select
+              className="w-full mt-1"
               value={item.description}
-              onChange={(e) =>
-                setItem({ ...item, description: e.target.value })
-              }
+              onChange={handleDescChange}
+              showSearch
+              placeholder="Description"
+              dropdownRender={(menu: any) => (
+                <>
+                  {menu}
+                  <div style={{ padding: "0 8px 4px" }}>
+                    <Input
+                      placeholder="Please enter party name"
+                      ref={inputDescRef}
+                      value={nameDesc}
+                      onChange={onDescChange}
+                      onKeyDown={(e) => e.stopPropagation()}
+                    />
+                    <div className="flex mx-auto justify-center">
+                      <Button
+                        type="text"
+                        icon={<FaUserPlus />}
+                        onClick={addDesc}
+                      >
+                        Add Description
+                      </Button>
+                    </div>
+                  </div>
+                </>
+              )}
+              options={uniqueDesc.map((item: any) => ({
+                label: item,
+                value: item,
+              }))}
             />
           </div>
-          {/* Design - spans 3 columns */}
+          {/* Design columns */}
           <div className="col-span-2">
             <div className="bg-red-900 text-yellow-300 font-bold text-center py-2 px-1 text-lg border border-red-800">
-              DESIGNE
+              DESIGN
             </div>
-            <input
-              type="text"
-              className="w-full border border-gray-400 py-1 px-2 mt-1 text-base focus:outline-none rounded"
-              placeholder="Designe"
-              value={item.designe}
-              onChange={(e) => setItem({ ...item, designe: e.target.value })}
+            <Select
+              className="w-full mt-1"
+              value={item.design}
+              onChange={handleDesignChange}
+              showSearch
+              placeholder="Design"
+              dropdownRender={(menu: any) => (
+                <>
+                  {menu}
+                  <div>
+                    <Input
+                      placeholder="Please enter design"
+                      ref={inputDesignRef}
+                      value={nameDesign}
+                      onChange={onDesignChange}
+                      onKeyDown={(e) => e.stopPropagation()}
+                    />
+                    <div className="flex mx-auto justify-center">
+                      <Button
+                        type="text"
+                        icon={<FaUserPlus />}
+                        onClick={addDesign}
+                      >
+                        Add Design
+                      </Button>
+                    </div>
+                  </div>
+                </>
+              )}
+              options={uniqueDesign.map((item: any) => ({
+                label: item,
+                value: item,
+              }))}
             />
           </div>
           <div className="col-span-2">
@@ -191,7 +339,7 @@ export default function AddItemModal({
             <div className="w-full mr-2">
               <div className="grid grid-cols-3 gap-2 mb-2">
                 <div className="flex font-bold text-yellow-300 bg-red-900 rounded items-center justify-center">
-                  DEBIT
+                  PAYMENT
                 </div>
                 <input
                   className="col-span-2 rounded w-full p-1"
