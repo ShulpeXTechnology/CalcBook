@@ -25,6 +25,10 @@ export default function Purchase() {
       debit: "9988",
       dueDate: "19-04-2025",
       status: "Active",
+      invoice: "",
+      challanNo: "",
+      desc: "",
+      design: "",
     },
     {
       id: 2,
@@ -43,6 +47,10 @@ export default function Purchase() {
       debit: "9988",
       dueDate: "19-04-2025",
       status: "Pending",
+      invoice: "",
+      challanNo: "",
+      desc: "",
+      design: "",
     },
     {
       id: 3,
@@ -61,6 +69,10 @@ export default function Purchase() {
       debit: "9988",
       dueDate: "19-04-2025",
       status: "Active",
+      invoice: "",
+      challanNo: "",
+      desc: "",
+      design: "",
     },
     {
       id: 4,
@@ -79,6 +91,10 @@ export default function Purchase() {
       debit: "9988",
       dueDate: "19-04-2025",
       status: "Cancel",
+      invoice: "",
+      challanNo: "",
+      desc: "",
+      design: "",
     },
     {
       id: 5,
@@ -97,6 +113,10 @@ export default function Purchase() {
       debit: "9988",
       dueDate: "19-04-2025",
       status: "Active",
+      invoice: "",
+      challanNo: "",
+      desc: "",
+      design: "",
     },
     {
       id: 6,
@@ -115,6 +135,10 @@ export default function Purchase() {
       debit: "9988",
       dueDate: "19-04-2025",
       status: "Delivered",
+      invoice: "",
+      challanNo: "",
+      desc: "",
+      design: "",
     },
   ]);
 
@@ -168,13 +192,21 @@ export default function Purchase() {
     new Set(rows.map((r) => r.category))
   ).filter(Boolean);
 
-  const uniqueStatus = Array.from(new Set(rows.map((r) => r.status))).filter(
+  const uniqueStatus = Array.from(
+    new Set(rows.map((r: any) => r.status))
+  ).filter(Boolean);
+
+  const uniqueNames = Array.from(new Set(rows.map((r: any) => r.name))).filter(
     Boolean
   );
 
-  const uniqueNames = Array.from(new Set(rows.map((r) => r.name))).filter(
+  const uniqueDesc = Array.from(new Set(rows?.map((r: any) => r.desc))).filter(
     Boolean
   );
+
+  const uniqueDesign = Array.from(
+    new Set(rows?.map((r: any) => r.design))
+  ).filter(Boolean);
 
   //   const getUniqueOptions = (key: string) => {
   //   const values = [...new Set(rows.map((item) => item[key]).filter(Boolean))];
@@ -339,10 +371,10 @@ export default function Purchase() {
   return (
     <>
       <PageMeta
-        title="React.js Sales Dashboard | TailAdmin - Next.js Admin Dashboard Template"
-        description="This is React.js Sales Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
+        title="Purchanse"
+        description="This is Purchanse Dashboard page"
       />
-      <PageBreadcrumb pageTitle="Sales" />
+      <PageBreadcrumb pageTitle="Purchanse" />
 
       <div className="space-y-6">
         <div className="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
@@ -350,7 +382,7 @@ export default function Purchase() {
           <div className="flex items-center justify-between px-6 py-5">
             <div>
               <h3 className="text-base font-medium text-gray-800 dark:text-white/90">
-                Sales
+                Purchanse
               </h3>
             </div>
             <div className="flex items-center gap-3">
@@ -451,6 +483,8 @@ export default function Purchase() {
         uniqueNames={uniqueNames}
         uniqueCategories={uniqueCategories}
         uniqueStatus={uniqueStatus}
+        uniqueDesc={uniqueDesc}
+        uniqueDesign={uniqueDesign}
       />
 
       <FilterModal

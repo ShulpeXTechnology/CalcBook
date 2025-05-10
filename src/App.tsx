@@ -18,12 +18,6 @@ import Blank from "./pages/Blank";
 import AppLayout from "./layout/AppLayout";
 import Home from "./pages/Dashboard/Home";
 import Purchase from "./pages/Purchase/Purchase";
-import Cloth from "./pages/Purchase/Cloth";
-import Emb from "./pages/Purchase/Emb";
-import Fiting from "./pages/Purchase/Fiting";
-import Kharch from "./pages/Purchase/Kharch";
-import Sirojkey from "./pages/Purchase/Sirojkey";
-import TRent from "./pages/Purchase/TRent";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 
 export default function App() {
@@ -49,12 +43,6 @@ export default function App() {
 
             {/* Purchase */}
             <Route path="/purchase" element={<Purchase />} />
-            <Route path="/cloth" element={<Cloth />} />
-            <Route path="/emb" element={<Emb />} />
-            <Route path="/fiting" element={<Fiting />} />
-            <Route path="/kharch" element={<Kharch />} />
-            <Route path="/sirojkey" element={<Sirojkey />} />
-            <Route path="/t-rent" element={<TRent />} />
 
             {/* Ui Elements */}
             <Route path="/alerts" element={<Alerts />} />
