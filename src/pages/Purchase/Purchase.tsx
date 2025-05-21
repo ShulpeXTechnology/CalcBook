@@ -246,7 +246,7 @@ export default function Purchase() {
         throw new Error("Failed to delete purchase");
       }
 
-      setRows((prevRows: any[]) => prevRows.filter((row) => row.id !== id));
+      setRows((prevRows: any[]) => prevRows.filter((row) => row.id != id));
       alert("Purchase deleted successfully.");
     } catch (error) {
       console.error("Error deleting purchase:", error);
