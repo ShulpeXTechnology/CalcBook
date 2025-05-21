@@ -1,6 +1,6 @@
-import { Modal, Select, DatePicker, Input, Button } from "antd";
+import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
-import { useRef, useState } from "react";
+import { Modal, Select, DatePicker, Input, Button } from "antd";
 import { FaUserPlus } from "react-icons/fa";
 
 export default function AddItemModal({
@@ -28,6 +28,30 @@ export default function AddItemModal({
   uniqueDesc: any;
   uniqueDesign: any;
 }) {
+  // Category add
+  const inputCatRef = useRef<any>(null);
+  const [nameCat, setNameCat] = useState<any>("");
+
+  const handleCatChange = (value: any) => {
+    setItem((prevItem: any) => ({ ...prevItem, category: value }));
+  };
+
+  const onCatChange = (event: any) => {
+    setNameCat(event.target.value);
+  };
+
+  const addCatItem = (e: any) => {
+    e.preventDefault();
+    if (nameCat && !uniqueCategories.includes(nameCat)) {
+      uniqueCategories.push(nameCat);
+    }
+    setNameCat("");
+    setTimeout(() => {
+      inputCatRef.current?.focus();
+    }, 0);
+  };
+
+  // Party name add
   const inputRef = useRef<any>(null);
   const [name, setName] = useState<any>("");
 
@@ -41,7 +65,6 @@ export default function AddItemModal({
 
   const addItem = (e: any) => {
     e.preventDefault();
-    // Add new item only if it's not empty and not already in the list
     if (name && !uniqueNames.includes(name)) {
       uniqueNames.push(name);
     }
@@ -88,14 +111,39 @@ export default function AddItemModal({
 
   const addDesign = (e: any) => {
     e.preventDefault();
-    if (nameDesign && !uniqueDesc.includes(nameDesign)) {
-      uniqueDesc.push(nameDesign);
+    if (nameDesign && !uniqueDesign.includes(nameDesign)) {
+      uniqueDesign.push(nameDesign);
     }
     setNameDesign("");
     setTimeout(() => {
-      inputDescRef.current?.focus();
+      inputDesignRef.current?.focus();
     }, 0);
   };
+
+  // Get total
+  useEffect(() => {
+    const qty = parseFloat(item.quantity) || 0;
+    const rate = parseFloat(item.rate) || 0;
+    const total = qty * rate;
+    setItem((prev: any) => ({ ...prev, total: total }));
+  }, [item.quantity, item.rate]);
+
+  // Discount Amt
+  useEffect(() => {
+    const total = parseFloat(item.total) || 0;
+    const discount = parseFloat(item.discount) || 0;
+    const disAmt = Math.round(total * (discount / 100));
+    setItem((prev: any) => ({ ...prev, discountP: disAmt }));
+  }, [item.total, item.discount]);
+
+  // Amount
+  useEffect(() => {
+    const total = parseFloat(item.total) || 0;
+    const discountP = parseFloat(item.discountP) || 0;
+    const loss = parseFloat(item.loss) || 0;
+    const amt = total - discountP - loss;
+    setItem((prev: any) => ({ ...prev, amount: amt }));
+  }, [item.total, item.discountP, item.loss]);
 
   return (
     <Modal
@@ -116,20 +164,41 @@ export default function AddItemModal({
         <div className="grid grid-cols-3 gap-4">
           <div className="col-span-2">
             <div className="mb-2 flex">
-              <div className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1 mr-2">
+              <label className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1 mr-2">
                 CATEGORY
-              </div>
+              </label>
               <Select
                 className="w-[50%]"
                 value={item.category}
-                onChange={(v) => setItem({ ...item, category: v })}
-              >
-                {uniqueCategories.map((name: any) => (
-                  <Select.Option key={name} value={name}>
-                    {name}
-                  </Select.Option>
-                ))}
-              </Select>
+                onChange={handleCatChange}
+                showSearch
+                placeholder="Select or add item"
+                dropdownRender={(menu: any) => (
+                  <>
+                    {menu}
+                    <div className="flex items-center">
+                      <Input
+                        placeholder="Please enter category"
+                        ref={inputCatRef}
+                        value={nameCat}
+                        onChange={onCatChange}
+                        onKeyDown={(e) => e.stopPropagation()}
+                      />
+                      <Button
+                        type="text"
+                        icon={<FaUserPlus />}
+                        onClick={addCatItem}
+                      >
+                        Add Category
+                      </Button>
+                    </div>
+                  </>
+                )}
+                options={uniqueCategories?.map((item: any) => ({
+                  label: item,
+                  value: item,
+                }))}
+              />
             </div>
             <div>
               <label className="block font-bold text-yellow-300 bg-red-900 px-2 py-1 rounded mb-1">
@@ -253,6 +322,7 @@ export default function AddItemModal({
               }))}
             />
           </div>
+
           {/* Design columns */}
           <div className="col-span-2">
             <div className="bg-red-900 text-yellow-300 font-bold text-center py-2 px-1 text-lg border border-red-800">
@@ -302,10 +372,12 @@ export default function AddItemModal({
               className="w-full border border-gray-400 py-1 px-2 mt-1 text-base focus:outline-none rounded"
               placeholder="Qty"
               value={item.quantity}
-              onChange={(e) => setItem({ ...item, quantity: e.target.value })}
+              onChange={(e) =>
+                setItem({ ...item, quantity: parseFloat(e.target.value) })
+              }
             />
           </div>
-          {/* Rate - spans 2 columns */}
+
           <div className="col-span-2">
             <div className="bg-red-900 text-yellow-300 font-bold text-center py-2 px-1 text-lg border border-red-800">
               RATE
@@ -315,10 +387,12 @@ export default function AddItemModal({
               className="w-full border border-gray-400 py-1 px-2 mt-1 text-base focus:outline-none rounded"
               placeholder="Rate"
               value={item.rate}
-              onChange={(e) => setItem({ ...item, rate: e.target.value })}
+              onChange={(e) =>
+                setItem({ ...item, rate: parseFloat(e.target.value) })
+              }
             />
           </div>
-          {/* Total - spans 2 columns */}
+
           <div className="col-span-2">
             <div className="bg-red-900 text-yellow-300 font-bold text-center py-2 px-1 text-lg border border-red-800">
               TOTAL
@@ -328,7 +402,8 @@ export default function AddItemModal({
               className="w-full border border-gray-400 py-1 px-2 mt-1 text-base focus:outline-none rounded"
               placeholder="Total"
               value={item.total}
-              onChange={(e) => setItem({ ...item, total: e.target.value })}
+              // onChange={(e) => setItem({ ...item, total: e.target.value })}
+              readOnly
             />
           </div>
         </div>

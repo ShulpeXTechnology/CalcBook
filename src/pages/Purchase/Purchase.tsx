@@ -1,146 +1,40 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Tag } from "antd";
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import PageMeta from "../../components/common/PageMeta";
 import BasicTableOne from "../../components/purchanse/Tables";
 import AddItemModal from "../../components/purchanse/AddItem";
 import FilterModal from "../../components/purchanse/FilterModal";
+import { API_BASE_URL } from "../../config/env";
+import { getToken } from "../../utils/auth";
 
 export default function Purchase() {
-  const [rows, setRows] = useState([
-    {
-      id: 1,
-      name: "KRISHNA-GHANABHAI",
-      category: "Embroidery",
-      quantity: "56",
-      rate: "195",
-      total: "10920",
-      discount: "7",
-      discountP: "764",
-      amount: "10156",
-      short: "-",
-      plane: "168",
-      loss: "168",
-      credit: "9988",
-      debit: "9988",
-      dueDate: "19-04-2025",
-      status: "Active",
-      invoice: "",
-      challanNo: "",
-      desc: "",
-      design: "",
-    },
-    {
-      id: 2,
-      name: "Kaiya George",
-      category: "CLOTH",
-      quantity: "56",
-      rate: "195",
-      total: "10920",
-      discount: "7",
-      discountP: "764",
-      amount: "10156",
-      short: "-",
-      plane: "168",
-      loss: "168",
-      credit: "9988",
-      debit: "9988",
-      dueDate: "19-04-2025",
-      status: "Pending",
-      invoice: "",
-      challanNo: "",
-      desc: "",
-      design: "",
-    },
-    {
-      id: 3,
-      name: "Zain Geidt",
-      category: "SIROJKEY",
-      quantity: "56",
-      rate: "195",
-      total: "10920",
-      discount: "7",
-      discountP: "764",
-      amount: "10156",
-      short: "-",
-      plane: "168",
-      loss: "168",
-      credit: "9988",
-      debit: "9988",
-      dueDate: "19-04-2025",
-      status: "Active",
-      invoice: "",
-      challanNo: "",
-      desc: "",
-      design: "",
-    },
-    {
-      id: 4,
-      name: "Abram Schleifer",
-      category: "FITING",
-      quantity: "56",
-      rate: "195",
-      total: "10920",
-      discount: "7",
-      discountP: "764",
-      amount: "10156",
-      short: "-",
-      plane: "168",
-      loss: "168",
-      credit: "9988",
-      debit: "9988",
-      dueDate: "19-04-2025",
-      status: "Cancel",
-      invoice: "",
-      challanNo: "",
-      desc: "",
-      design: "",
-    },
-    {
-      id: 5,
-      name: "Carla George",
-      category: "T-RENT",
-      quantity: "56",
-      rate: "195",
-      total: "10920",
-      discount: "7",
-      discountP: "764",
-      amount: "10156",
-      short: "-",
-      plane: "168",
-      loss: "168",
-      credit: "9988",
-      debit: "9988",
-      dueDate: "19-04-2025",
-      status: "Active",
-      invoice: "",
-      challanNo: "",
-      desc: "",
-      design: "",
-    },
-    {
-      id: 6,
-      name: "Zain Geidt",
-      category: "P KHARCH",
-      quantity: "56",
-      rate: "195",
-      total: "10920",
-      discount: "7",
-      discountP: "764",
-      amount: "10156",
-      short: "-",
-      plane: "168",
-      loss: "168",
-      credit: "9988",
-      debit: "9988",
-      dueDate: "19-04-2025",
-      status: "Delivered",
-      invoice: "",
-      challanNo: "",
-      desc: "",
-      design: "",
-    },
-  ]);
+  const token = getToken();
+  const [rows, setRows] = useState<any>([]);
+
+  // Get data
+  const fetchPurchaseData = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/purchase`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Include token
+        },
+      });
+      if (!response.ok) throw new Error("Failed to fetch purchase data");
+
+      const data = await response.json();
+      setRows(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      alert("Failed to load purchase data. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    fetchPurchaseData();
+  }, []);
 
   // Filter Modal
   const [filterModalVisible, setFilterModalVisible] = useState(false);
@@ -168,18 +62,18 @@ export default function Purchase() {
   };
 
   const filteredRows = useMemo(() => {
-    return rows.filter((row) => {
-      if (appliedFilters.id && row.id != Number(appliedFilters.id))
+    return rows.filter((row: any) => {
+      if (appliedFilters.id && row?.id != Number(appliedFilters.id))
         return false;
-      if (appliedFilters.name && row.name != appliedFilters.name) return false;
-      if (appliedFilters.category && row.category != appliedFilters.category)
+      if (appliedFilters.name && row?.name != appliedFilters.name) return false;
+      if (appliedFilters.category && row?.category != appliedFilters.category)
         return false;
-      if (appliedFilters.status && row.status != appliedFilters.status)
+      if (appliedFilters.status && row?.status != appliedFilters.status)
         return false;
       if (appliedFilters.dateRange.length == 2) {
         const startDate = appliedFilters.dateRange[0].startOf("day").toDate();
         const endDate = appliedFilters.dateRange[1].endOf("day").toDate();
-        const rowDate = parseDate(row.dueDate);
+        const rowDate = parseDate(row?.dueDate);
         if (!rowDate) return false;
         if (rowDate < startDate || rowDate > endDate) return false;
       }
@@ -189,27 +83,29 @@ export default function Purchase() {
 
   // Dropdown options
   const uniqueCategories = Array.from(
-    new Set(rows.map((r) => r.category))
+    new Set(rows.map((r: any) => r?.category))
   ).filter(Boolean);
 
   const uniqueStatus = Array.from(
-    new Set(rows.map((r: any) => r.status))
+    new Set(rows.map((r: any) => r?.status))
   ).filter(Boolean);
 
-  const uniqueNames = Array.from(new Set(rows.map((r: any) => r.name))).filter(
+  const uniqueNames = Array.from(new Set(rows.map((r: any) => r?.name))).filter(
     Boolean
   );
 
-  const uniqueDesc = Array.from(new Set(rows?.map((r: any) => r.desc))).filter(
+  const uniqueDesc = Array.from(new Set(rows?.map((r: any) => r?.desc))).filter(
     Boolean
   );
 
   const uniqueDesign = Array.from(
-    new Set(rows?.map((r: any) => r.design))
+    new Set(rows?.map((r: any) => r?.design))
   ).filter(Boolean);
 
-  //   const getUniqueOptions = (key: string) => {
-  //   const values = [...new Set(rows.map((item) => item[key]).filter(Boolean))];
+  // const getUniqueOptions = (key: string) => {
+  //   const values = [
+  //     ...new Set(rows.map((item: any) => item[key]).filter(Boolean)),
+  //   ];
   //   return values.map((val) => ({ value: val, label: val }));
   // };
 
@@ -250,29 +146,29 @@ export default function Purchase() {
   if (appliedFilters.id)
     filterTags.push({
       key: "id",
-      label: `ID: ${appliedFilters.id}`,
+      label: `ID: ${appliedFilters?.id}`,
     });
   if (appliedFilters.name)
     filterTags.push({
       key: "name",
-      label: `User: ${appliedFilters.name}`,
+      label: `User: ${appliedFilters?.name}`,
     });
   if (appliedFilters.category)
     filterTags.push({
       key: "category",
-      label: `Category: ${appliedFilters.category}`,
+      label: `Category: ${appliedFilters?.category}`,
     });
   if (appliedFilters.status)
     filterTags.push({
       key: "status",
-      label: `Status: ${appliedFilters.status}`,
+      label: `Status: ${appliedFilters?.status}`,
     });
   if (appliedFilters.dateRange.length == 2)
     filterTags.push({
       key: "date",
-      label: `Due: ${appliedFilters.dateRange[0].format(
+      label: `Due: ${appliedFilters?.dateRange?.[0].format(
         "DD-MM-YYYY"
-      )} ~ ${appliedFilters.dateRange[1].format("DD-MM-YYYY")}`,
+      )} ~ ${appliedFilters?.dateRange?.[1].format("DD-MM-YYYY")}`,
     });
 
   const removeFilter = (key: any) => {
@@ -332,40 +228,114 @@ export default function Purchase() {
     setShowModal(true);
   };
 
-  const handleDelete = (id: any) => {
-    setRows(rows.filter((row) => row.id != id));
+  const handleDelete = async (id: number) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this purchase?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/purchase/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete purchase");
+      }
+
+      setRows((prevRows: any[]) => prevRows.filter((row) => row.id !== id));
+      alert("Purchase deleted successfully.");
+    } catch (error) {
+      console.error("Error deleting purchase:", error);
+      alert("There was an error deleting the purchase. Please try again.");
+    }
   };
 
-  const handleModalSubmit = (newItem: any) => {
-    if (modalEditId) {
-      setRows((rows) =>
-        rows.map((row) =>
-          row.id == modalEditId ? { ...row, ...newItem, id: modalEditId } : row
-        )
-      );
-    } else {
-      const newId = rows.length ? Math.max(...rows.map((r) => r.id)) + 1 : 1;
-      setRows([{ ...newItem, id: newId }, ...rows]);
+  const handleModalSubmit = async (newItem: any) => {
+    const itemToSend = {
+      ...newItem,
+      challn_no: newItem.challnNo,
+      discount_p: newItem.discountP,
+      due_date: newItem.dueDate,
+    };
+
+    try {
+      let response: any;
+      let data: any;
+
+      if (modalEditId) {
+        // Edit mode: PUT request
+        response = await fetch(`${API_BASE_URL}/api/purchase/${modalEditId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(itemToSend),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update item");
+        }
+
+        data = await response.json();
+
+        setRows((rows: any[]) =>
+          rows.map((row) =>
+            row.id == modalEditId
+              ? { ...row, ...newItem, id: modalEditId }
+              : row
+          )
+        );
+      } else {
+        response = await fetch(`${API_BASE_URL}/api/purchase`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(itemToSend),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to save item");
+        }
+
+        data = await response.json();
+
+        setRows((prevRows: any[]) => [
+          { ...newItem, id: data.id },
+          ...prevRows,
+        ]);
+      }
+
+      // Reset modal and form
+      setShowModal(false);
+      setModalEditId(null);
+      setItem({
+        name: "",
+        category: "",
+        quantity: "",
+        rate: "",
+        total: "",
+        discount: "",
+        discountP: "",
+        amount: "",
+        short: "",
+        plane: "",
+        loss: "",
+        credit: "",
+        debit: "",
+        dueDate: "",
+        status: "",
+      });
+    } catch (error) {
+      console.error("Error submitting item:", error);
+      alert("There was an error saving the purchase. Please try again.");
     }
-    setShowModal(false);
-    setModalEditId(null);
-    setItem({
-      name: "",
-      category: "",
-      quantity: "",
-      rate: "",
-      total: "",
-      discount: "",
-      discountP: "",
-      amount: "",
-      short: "",
-      plane: "",
-      loss: "",
-      credit: "",
-      debit: "",
-      dueDate: "",
-      status: "",
-    });
   };
 
   return (

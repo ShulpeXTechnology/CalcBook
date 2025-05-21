@@ -167,10 +167,5 @@ TailAdmin React.js Free Version is released under the MIT License.
 If you find this project helpful, please consider giving it a star on GitHub. Your support helps us continue developing and maintaining this template.
 
 <!-- Calc -->
-<!-- sort + deko = loss
-amt -loss = credit
-qty * rate = total
-tatal * dis% = disA
-total - disA = amt
-dis + loss - total = amt (credit)
+<!-- dis + loss - total = amt (credit)
 payment = cash, cheque/Online, due, Parts -->

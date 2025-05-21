@@ -1,14 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
 
-// Assume these icons are imported from an icon library
 import {
   BoxCubeIcon,
-  // CalenderIcon,
   ChevronDownIcon,
   GridIcon,
   HorizontaLDots,
-  ListIcon,
   PageIcon,
   PieChartIcon,
   PlugInIcon,
@@ -32,20 +29,10 @@ const navItems: NavItem[] = [
     path: "/",
     // subItems: [{ name: "Ecommerce", path: "/", pro: false }],
   },
-  // {
-  //   icon: <CalenderIcon />,
-  //   name: "Calendar",
-  //   path: "/calendar",
-  // },
   {
     icon: <UserCircleIcon />,
     name: "User Profile",
     path: "/profile",
-  },
-  {
-    name: "Forms",
-    icon: <ListIcon />,
-    path: "/form-elements",
   },
   {
     name: "Sales",
@@ -65,14 +52,14 @@ const navItems: NavItem[] = [
       { name: "T-Rent", path: "/t-rent", pro: false },
     ],
   },
-  {
-    name: "Page",
-    icon: <PageIcon />,
-    subItems: [
-      { name: "Blank Page", path: "/blank", pro: false },
-      { name: "404 Error", path: "/error-404", pro: false },
-    ],
-  },
+  // {
+  //   name: "Page",
+  //   icon: <PageIcon />,
+  //   subItems: [
+  //     { name: "Blank Page", path: "/blank", pro: false },
+  //     { name: "404 Error", path: "/error-404", pro: false },
+  //   ],
+  // },
 ];
 
 const othersItems: NavItem[] = [
