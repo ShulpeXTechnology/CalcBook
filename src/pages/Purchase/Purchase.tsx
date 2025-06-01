@@ -94,9 +94,9 @@ export default function Purchase() {
     Boolean
   );
 
-  const uniqueDesc = Array.from(new Set(rows?.map((r: any) => r?.desc))).filter(
-    Boolean
-  );
+  const uniqueDesc = Array.from(
+    new Set(rows?.map((r: any) => r?.description))
+  ).filter(Boolean);
 
   const uniqueDesign = Array.from(
     new Set(rows?.map((r: any) => r?.design))
@@ -255,6 +255,8 @@ export default function Purchase() {
   };
 
   const handleModalSubmit = async (newItem: any) => {
+    console.log(newItem.dueDate, "newItem.dueDate");
+
     const itemToSend = {
       ...newItem,
       challn_no: newItem.challnNo,

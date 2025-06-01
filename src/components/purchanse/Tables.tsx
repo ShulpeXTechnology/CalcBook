@@ -33,12 +33,12 @@ export default function Tables({
           >
             User
           </TableCell>
-          <TableCell
+          {/* <TableCell
             isHeader
             className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
           >
             Category
-          </TableCell>
+          </TableCell> */}
           <TableCell
             isHeader
             className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
@@ -143,11 +143,11 @@ export default function Tables({
                 </span>
               </div>
             </TableCell>
-            <TableCell
+            {/* <TableCell
               className={`${"px-4 py-3"} text-gray-500 text-start text-theme-sm dark:text-gray-400"`}
             >
               {order.category?.toUpperCase()}
-            </TableCell>
+            </TableCell> */}
             <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
               {order.quantity}
             </TableCell>
@@ -161,7 +161,7 @@ export default function Tables({
               {order.discount} %
             </TableCell>
             <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-              ₹ {order.discountP}
+              ₹ {order.discount_p}
             </TableCell>
             <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
               {order.amount}
@@ -176,13 +176,13 @@ export default function Tables({
               {order.loss}
             </TableCell>
             <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-              {order.credit}
+              {order.amount}
             </TableCell>
             <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
               {order.debit}
             </TableCell>
             <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-              {order.dueDate}
+              {order.due_date}
             </TableCell>
             <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
               <Badge
